@@ -1,0 +1,36 @@
+{
+  "Camera": [
+    {
+      "id": "2",
+      "tenMay": "imoun 2",
+      "viTriLap": "ha no 2",
+      "gia": 1000,
+      "nguoiLap": "phung huy 2",
+      "trangThai": "hong"
+    },
+    {
+      "id": "3",
+      "tenMay": "imoun 3",
+      "viTriLap": "ha no 3",
+      "gia": 1000,
+      "nguoiLap": "phung huy 3",
+      "trangThai": "dang sua"
+    },
+    {
+      "id": "f18e",
+      "tenMay": "win",
+      "gia": "111",
+      "viTriLap": "ha noi",
+      "nguoiLap": "huy",
+      "trangThai": "hong"
+    },
+    {
+      "id": "d429",
+      "tenMay": "asd",
+      "gia": "1",
+      "viTriLap": "sadsa",
+      "nguoiLap": "dsadsa",
+      "trangThai": "dang sua"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>tên may</th>
+            <th>vi tri lap</th>
+            <th>nguoi lap</th>
+            <th>gia</th>
+            <th>trang thai</th>
+            <th>hanh dong</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cam in listCam">
+            <td>{{cam.tenMay}}</td>
+            <td>{{cam.viTriLap}}</td>
+            <td>{{cam.nguoiLap}}</td>
+            <td>{{cam.gia}}</td>
+            <td>{{cam.trangThai}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteSp(cam.id)">Xóa</button>
+                <button class="btn btn-warning"><a href="#!edit/camera/{{cam.id}}">Sửa</a></button>
+                <button class="btn btn-info"><a style="color: azure;" href="#!/detail/camera/{{cam.id}}">Chi tiết</a></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
