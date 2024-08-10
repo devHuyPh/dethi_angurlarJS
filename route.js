@@ -15,7 +15,7 @@ app.config(function ($routeProvider) {
             controller: "detailCtrl"
         })
         .when("/edit/camera/:id", {
-            templateUrl: "./views/list.html",
+            templateUrl: "./views/edit.html",
             controller: "editCtrl"
         })
 

@@ -5,8 +5,8 @@
       "tenMay": "imoun 2",
       "viTriLap": "ha no 2",
       "gia": 1000,
-      "nguoiLap": "phung huy 2",
-      "trangThai": "hong"
+      "nguoiLap": "phung huy da lap",
+      "trangThai": "dang sua"
     },
     {
       "id": "3",
@@ -14,7 +14,7 @@
       "viTriLap": "ha no 3",
       "gia": 1000,
       "nguoiLap": "phung huy 3",
-      "trangThai": "dang sua"
+      "trangThai": "hoat dong"
     },
     {
       "id": "f18e",
@@ -27,7 +27,7 @@
     {
       "id": "d429",
       "tenMay": "asd",
-      "gia": "1",
+      "gia": "12",
       "viTriLap": "sadsa",
       "nguoiLap": "dsadsa",
       "trangThai": "dang sua"

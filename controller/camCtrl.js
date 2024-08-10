@@ -1,31 +1,50 @@
-var api = "http://localhost:3000/Camera/"
+var api = "http://localhost:3000/Camera/";
 
-app.controller("listCtrl", function ($scope, $http) {
-    $scope.listCam = []
+function validateFields(fields, obj) {
+    let errors = {};
+    let isValid = true;
 
-    $http.get(api).then(function (res) {
-        $scope.listCam = res.data
-        console.log($scope.listCam);
-
-    }, function () {
-        alert("lỗi dưcx lieu")
-    })
-
-    $scope.deleteSp = function (id) {
-        let msg = window.confirm("co chac chan xoa kh")
-        if (msg) {
-            $http.delete(api + id).then(function (res) {
-                alert('xoa thanh cong')
-                $scope.listCam = res.data
-            }, function () {
-                alert('xoa that bai')
-            })
+    for (let key in fields) {
+        if (!obj[key]) {
+            errors[key] = fields[key] + " không được để trống";
+            isValid = false;
         }
     }
-})
 
+    if (obj.gia && (isNaN(obj.gia) || obj.gia <= 0)) {
+        errors.gia = "Giá phải là một số dương hợp lệ";
+        isValid = false;
+    }
 
-//add 
+    return { isValid, errors };
+}
+
+// Controller listCtrl
+app.controller("listCtrl", function ($scope, $http) {
+    $scope.listCam = [];
+
+    $http.get(api).then(function (res) {
+        $scope.listCam = res.data;
+        console.log($scope.listCam);
+    }, function () {
+        alert("Lỗi dữ liệu");
+    });
+
+    $scope.deleteSp = function (id) {
+        let msg = window.confirm("Có chắc chắn xóa không?");
+        if (msg) {
+            $http.delete(api + id).then(function () {
+                alert('Xóa thành công');
+                // Xóa camera khỏi danh sách hiện tại
+                $scope.listCam = $scope.listCam.filter(cam => cam.id !== id);
+            }, function () {
+                alert('Xóa thất bại');
+            });
+        }
+    };
+});
+
+// Controller addCtrl
 app.controller("addCtrl", function ($scope, $http) {
     $scope.addSp = function () {
         const fields = {
@@ -35,26 +54,12 @@ app.controller("addCtrl", function ($scope, $http) {
             gia: "Giá",
             trangThai: "Trạng thái"
         };
+        
 
-        $scope.errors = {};
+        const validation = validateFields(fields, $scope);
+        $scope.errors = validation.errors;
 
-        let isValid = true;
-
-        // Validate fields
-        for (let key in fields) {
-            if (!$scope[key]) {
-                $scope.errors[key] = fields[key] + " không được để trống";
-                isValid = false;
-            }
-        }
-
-        // Validate price separately
-        if ($scope.gia && (isNaN($scope.gia) || $scope.gia <= 0)) {
-            $scope.errors.gia = "Giá phải là một số dương hợp lệ";
-            isValid = false;
-        }
-
-        if (!isValid) {
+        if (!validation.isValid) {
             return;
         }
 
@@ -67,7 +72,7 @@ app.controller("addCtrl", function ($scope, $http) {
         };
 
         $http.post(api, cameraData)
-            .then(function (res) {
+            .then(function () {
                 alert("Thêm thành công");
                 document.location = "#!list-camera";
             })
@@ -77,16 +82,51 @@ app.controller("addCtrl", function ($scope, $http) {
     };
 });
 
+// Controller detailCtrl
+app.controller("detailCtrl", function ($scope, $http, $routeParams) {
+    $scope.Objcam = {};
 
-//detail
-
-app.controller("detailCtrl",function($scope,$http,$routeParams){
-    $scope.Objcam={}
-    $http.get(api+$routeParams.id).then(function(res){
-        $scope.Objcam=res.data
+    $http.get(api + $routeParams.id).then(function (res) {
+        $scope.Objcam = res.data;
         console.log($scope.Objcam);
-        
-    },function(){
-        alert('lỗi du lieu')
-    })
-})
+    }, function () {
+        alert("Lỗi dữ liệu");
+    });
+});
+
+// Controller editCtrl
+app.controller("editCtrl", function ($scope, $http, $routeParams) {
+    $http.get(api + $routeParams.id)
+        .then(function (res) {
+            $scope.Objcam = res.data;
+        })
+        .catch(function () {
+            alert("Không thể tải dữ liệu sản phẩm.");
+        });
+
+    $scope.editSp = function () {
+        const fields = {
+            tenMay: "Tên máy",
+            viTriLap: "Vị trí lắp",
+            nguoiLap: "Người lắp",
+            gia: "Giá",
+            trangThai: "Trạng thái"
+        };
+
+        const validation = validateFields(fields, $scope.Objcam);
+        $scope.errors = validation.errors;
+
+        if (!validation.isValid) {
+            return;
+        }
+
+        $http.put(api + $routeParams.id, $scope.Objcam)
+            .then(function () {
+                alert("Cập nhật thành công");
+                document.location = "#!list-camera";
+            })
+            .catch(function () {
+                alert("Cập nhật thất bại");
+            });
+    };
+});

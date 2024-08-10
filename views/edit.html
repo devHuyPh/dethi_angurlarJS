@@ -1,0 +1,34 @@
+<form>
+    <div class="form-group">
+        <label for="">Tên</label>
+        <input type="text" name="" id="" class="form-control" ng-model="Objcam.tenMay" >
+        <small id="helpId" class="text-muted" ng-show="errors.tenMay">{{ errors.tenMay }}</small>
+    </div>
+    <div class="form-group">
+        <label for="">Vị trí lắp</label>
+        <input type="text" name="" id="" class="form-control" ng-model="Objcam.viTriLap" >
+        <small id="helpId" class="text-muted" ng-show="errors.viTriLap">{{ errors.viTriLap }}</small>
+    </div>
+    <div class="form-group">
+        <label for="">Người lắp</label>
+        <input type="text" name="" id="" class="form-control" ng-model="Objcam.nguoiLap" >
+        <small id="helpId" class="text-muted" ng-show="errors.nguoiLap">{{ errors.nguoiLap }}</small>
+    </div>
+    <div class="form-group">
+        <label for="">Giá</label>
+        <input type="text" name="" id="" class="form-control" ng-model="Objcam.gia" >
+        <small id="helpId" class="text-muted" ng-show="errors.gia">{{ errors.gia }}</small>
+    </div>
+    <div class="form-group">
+        <label for="">Trạng thái</label>
+        <select name="" id="" class="form-control" ng-model="Objcam.trangThai" >
+            <option value="">Mời chọn trạng thái</option>
+            <option value="hong">Hỏng</option>
+            <option value="dang sua">Đang sửa</option>
+            <option value="hoat dong">Hoạt động</option>
+        </select>
+        <small id="helpId" class="text-muted" ng-show="errors.trangThai">{{ errors.trangThai }}</small>
+    </div>
+
+    <button class="btn btn-primary" ng-click="editSp()">Edit</button>
+</form>
